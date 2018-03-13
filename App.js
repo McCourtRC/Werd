@@ -38,6 +38,10 @@ export default class App extends Component<Props> {
     }
   }
 
+  onPressLogout = () => {
+    firebase.auth().signOut();
+  }
+
   render() {
     if (!this.state.user) {
       return <Login />;
@@ -45,18 +49,14 @@ export default class App extends Component<Props> {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to my awesome app {this.state.user.email}!</Text>
+        <Text style={styles.welcome}>Welcome to my awesome app {this.state.user.name}!</Text>
         <Button 
           title='Logout'
-          onPress={onPressLogout}
+          onPress={this.onPressLogout}
         />
       </View>
     );
   }
-}
-
-onPressLogout = () => {
-  firebase.auth().signOut();
 }
 
 const styles = StyleSheet.create({
