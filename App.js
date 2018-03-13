@@ -5,8 +5,9 @@
  */
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
-import firebase from 'react-native-firebase';
+import { Button, Platform, StyleSheet, Text, View } from 'react-native';
+import firebase, { Firebase } from 'react-native-firebase';
+import Login from './components/Login';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -19,38 +20,43 @@ type Props = {};
 export default class App extends Component<Props> {
   constructor() {
     super();
+    this.unsubscriber = null;
     this.state = {
-      isAuthenticated: false,
+      user: null,
     };
   }
 
   componentDidMount() {
-    firebase.auth().signInAnonymously().then(() => {
-      this.setState({
-        isAuthenticated: true
-      });
+    this.unsubscriber = firebase.auth().onAuthStateChanged((user) => {
+      this.setState({ user });
     });
   }
 
+  componentWillUnmount() {
+    if (this.unsubscriber) {
+      this.unsubscriber();
+    }
+  }
+
   render() {
-    if(!this.state.isAuthenticated) {
-      return null;
+    if (!this.state.user) {
+      return <Login />;
     }
 
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
+        <Text style={styles.welcome}>Welcome to my awesome app {this.state.user.email}!</Text>
+        <Button 
+          title='Logout'
+          onPress={onPressLogout}
+        />
       </View>
     );
   }
+}
+
+onPressLogout = () => {
+  firebase.auth().signOut();
 }
 
 const styles = StyleSheet.create({
