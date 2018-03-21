@@ -3,6 +3,8 @@ import { Button, Text, View } from 'react-native';
 
 import firebase from 'react-native-firebase';
 
+import { ViewStyles } from '../styles/Styles';
+
 export default class Home extends Component {
 
     onPressLogout = () => {
@@ -11,7 +13,7 @@ export default class Home extends Component {
 
     render() {
         return(
-            <View>
+            <View style={ViewStyles.centered}>
                 <Button 
                     title='Logout'
                     onPress={this.onPressLogout}
