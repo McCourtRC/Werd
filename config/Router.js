@@ -3,7 +3,7 @@ import { StackNavigator, TabNavigator } from 'react-navigation';
 import Login from '../screens/Login';
 import SignUp from '../screens/SignUp';
 
-import Home from '../screens/Home';
+import GameController from '../screens/GameController';
 import Profile from '../screens/Profile';
 
 export const SignedOut = StackNavigator({
@@ -22,8 +22,8 @@ export const SignedOut = StackNavigator({
 });
 
 export const SignedIn = TabNavigator({
-    Home: {
-        screen: Home, 
+    GameController: {
+        screen: GameController, 
         navigationOptions: {
             title: "Home"
         }
