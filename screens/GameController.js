@@ -11,7 +11,7 @@ import firebase from 'react-native-firebase'
 
 export default class GameController extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.ref = firebase.firestore().collection('todos')
 
         this.state = {
@@ -55,7 +55,7 @@ export default class GameController extends Component {
         if(this.state.index === 2) {
             // Start game
             clearInterval(this.countDownTimer)
-            this.startTimer();
+            this.startTimer()
         }
         this.setState({index: this.state.index + 1})
     }
@@ -100,6 +100,6 @@ export default class GameController extends Component {
                     onSubmit={this.onSubmitHandler}
                 />
             </View>
-        ); 
+        ) 
     }
 }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { Alert, Button, Stylesheet, View, Text, TextInput } from 'react-native'
 import firebase from 'react-native-firebase'
 
@@ -6,21 +6,21 @@ import firebase from 'react-native-firebase'
 
 export default class Login extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             email: null,
             password: null
-        };
+        }
     }
 
     onPressLogin = () => {
         firebase.auth().signInAndRetrieveDataWithEmailAndPassword(this.state.email, this.state.password)
             .then((user)=> {
-                Alert.alert('Welcome!', 'successfully signed in');
+                Alert.alert('Welcome!', 'successfully signed in')
             })
             .catch((error)=> {
-                Alert.alert('Error', error.message);
-            });
+                Alert.alert('Error', error.message)
+            })
     }
     
     onPressSignUp = () => {
@@ -29,8 +29,8 @@ export default class Login extends Component {
         //         Alert.alert('Success', 'you have been signed up')
         //     })
         //     .catch((error)=> {
-        //         Alert.alert('Error', error.message);
-        //     });
+        //         Alert.alert('Error', error.message)
+        //     })
 
     }
 

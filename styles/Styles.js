@@ -1,6 +1,6 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native'
 
-const { width, height } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window')
 
 // View
 export const ViewStyles = StyleSheet.create({
@@ -13,7 +13,7 @@ export const ViewStyles = StyleSheet.create({
         flex: 1,
         alignItems: 'center'
     }
-});
+})
 
 // Input
 export const InputStyles = StyleSheet.create({
@@ -25,7 +25,7 @@ export const InputStyles = StyleSheet.create({
         paddingRight: 10,
         marginTop: 0
     }
-});
+})
 
 export const TextStyles = StyleSheet.create({
     timer: {

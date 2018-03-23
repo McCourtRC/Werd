@@ -1,10 +1,10 @@
-import { StackNavigator, TabNavigator } from 'react-navigation';
+import { StackNavigator, TabNavigator } from 'react-navigation'
 
-import Login from '../screens/Login';
-import SignUp from '../screens/SignUp';
+import Login from '../screens/Login'
+import SignUp from '../screens/SignUp'
 
-import GameController from '../screens/GameController';
-import Profile from '../screens/Profile';
+import GameController from '../screens/GameController'
+import Profile from '../screens/Profile'
 
 export const SignedOut = StackNavigator({
     Login: {
@@ -19,7 +19,7 @@ export const SignedOut = StackNavigator({
             title: "Sign Up"
         }
     }
-});
+})
 
 export const SignedIn = TabNavigator({
     GameController: {
