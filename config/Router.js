@@ -25,14 +25,20 @@ export const SignedOut = StackNavigator({
 const HomeNav = StackNavigator({
     Home: {
         screen: Home,
+        navigationOptions: {
+            header: null
+        }
     },
     GameController: {
         screen: GameController,
         navigationOptions: {
+            title: "game",
+            gestureEnabled: false,
+            headerVisible: true
         }
     }
 }, {
-    headerMode: 'none'
+    headerMode: 'screen'
 })
 
 export const SignedIn = TabNavigator({

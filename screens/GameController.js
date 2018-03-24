@@ -23,8 +23,30 @@ export default class GameController extends Component {
 
     componentDidMount() {
         this.countDownTimer = setInterval(this.countDown, 1000)
-
         this.setState({currentWord:this.wordList[3]})
+
+    }
+
+    componentWillUnmount() {
+        // If game is still running, incomplete
+        if( this.timer ) {
+            this.stopTimer()
+        }
+    }
+
+    finishGame = () => {
+        // submit score
+
+        this.props.navigation.goBack();
+    }
+
+    quit = () => {
+        console.log("quitting")
+        this.stopTimer()
+
+        // mark unfinished game
+
+        this.props.navigation.goBack();
     }
 
     // MARK: Timer Methods
@@ -67,6 +89,7 @@ export default class GameController extends Component {
         // Check end of game
         if( word === currentWord && index === this.wordList.length - 1) {
             this.stopTimer()
+            Alert.alert("Done!", "You scored " + this.state.time, [{text: "Return", onPress: this.finishGame}])
         }
         // Check word is correct
         else if( word === currentWord ) {

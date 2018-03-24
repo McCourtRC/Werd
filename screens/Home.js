@@ -16,7 +16,6 @@ export default class Home extends Component {
         this.gamesCollection.where("seed", "<=", 1).limit(1).get()
             .then((snapshot)=> {
                 let game = snapshot.docs[0].data()
-                console.log(game.words)
                 this.props.navigation.navigate('GameController', { words: game.words })
             })
             .catch((error) => {
