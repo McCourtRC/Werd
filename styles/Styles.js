@@ -30,7 +30,7 @@ export const InputStyles = StyleSheet.create({
 export const TextStyles = StyleSheet.create({
     timer: {
         fontSize: 30,
-        marginTop: 50,
+        marginTop: 30,
         marginBottom: 30
     }
 })

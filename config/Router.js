@@ -26,15 +26,15 @@ const HomeNav = StackNavigator({
     Home: {
         screen: Home,
         navigationOptions: {
-            header: null
+            header: null,
+            headerBackTitle: "Quit"
         }
     },
     GameController: {
         screen: GameController,
         navigationOptions: {
-            title: "game",
             gestureEnabled: false,
-            headerVisible: true
+            headerVisible: true,
         }
     }
 }, {
