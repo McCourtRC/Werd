@@ -13,6 +13,7 @@ export default class GameController extends Component {
     constructor(props) {
         super(props)
         this.ref = firebase.firestore().collection('todos')
+        this.wordList = ['3','2','1'].concat(this.props.navigation.state.params.words)
 
         this.state = {
             time: 0,
@@ -20,19 +21,10 @@ export default class GameController extends Component {
         }
     }
 
-    words = [
-         '3',
-         '2',
-         '1',
-        'potato',
-        'monkey',
-        'octopus'
-    ]
-
     componentDidMount() {
         this.countDownTimer = setInterval(this.countDown, 1000)
 
-        this.setState({currentWord:this.words[3]})
+        this.setState({currentWord:this.wordList[3]})
     }
 
     // MARK: Timer Methods
@@ -62,7 +54,7 @@ export default class GameController extends Component {
 
     nextWord() {
         let newIndex = this.state.index + 1
-        if(newIndex < this.words.length) {
+        if(newIndex < this.wordList.length) {
             this.setState({index: newIndex})
         }
     }
@@ -70,10 +62,10 @@ export default class GameController extends Component {
     // MARK: CustomInput Methods
     onSubmitHandler = (word) => {
         let index = this.state.index
-        let currentWord = this.words[index]
+        let currentWord = this.wordList[index]
 
         // Check end of game
-        if( word === currentWord && index === this.words.length - 1) {
+        if( word === currentWord && index === this.wordList.length - 1) {
             this.stopTimer()
         }
         // Check word is correct
@@ -93,7 +85,7 @@ export default class GameController extends Component {
             <View style={ViewStyles.horizontalCenter}>
                 <TimerView time={this.state.time}/>
                 <WordSliderView
-                    data={this.words}
+                    data={this.wordList}
                     index={this.state.index}
                 />
                 <InputView

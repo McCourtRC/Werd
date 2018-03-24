@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { Alert, Button, Stylesheet, View, Text, TextInput } from 'react-native'
+
 import firebase from 'react-native-firebase'
-
-
 
 export default class Login extends Component {
     constructor(props) {
@@ -59,7 +58,6 @@ export default class Login extends Component {
         )
     }
 }
-
 
 const styles = {
     container: {
