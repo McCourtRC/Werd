@@ -12,7 +12,7 @@ import firebase from 'react-native-firebase'
 export default class GameController extends Component {
     constructor(props) {
         super(props)
-        this.ref = firebase.firestore().collection('todos')
+        this.scoresRef = firebase.firestore().collection('scores')
         this.wordList = ['3','2','1'].concat(this.props.navigation.state.params.words)
 
         this.state = {

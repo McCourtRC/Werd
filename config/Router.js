@@ -5,6 +5,7 @@ import SignUp from '../screens/SignUp'
 
 import Home from '../screens/Home'
 import GameController from '../screens/GameController'
+import Friends from '../screens/Friends'
 import Profile from '../screens/Profile'
 
 export const SignedOut = StackNavigator({
@@ -46,6 +47,12 @@ export const SignedIn = TabNavigator({
         screen: HomeNav, 
         navigationOptions: {
             title: "Home"
+        }
+    },
+    Friends: {
+        screen: Friends,
+        navigationOptions: {
+            title: "Friends"
         }
     },
     Profile: {

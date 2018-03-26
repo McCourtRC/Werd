@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Alert, Button, Stylesheet, View, Text, TextInput } from 'react-native'
 
+import { InputStyles, ViewStyles } from '../styles/Styles'
+
 import firebase from 'react-native-firebase'
 
 export default class Login extends Component {
@@ -31,17 +33,19 @@ export default class Login extends Component {
         //         Alert.alert('Error', error.message)
         //     })
 
+        this.props.navigation.navigate("SignUp")
+
     }
 
     render() {
         return (
-            <View style={styles.container}>
-                <TextInput style={styles.input} 
+            <View style={ViewStyles.centered}>
+                <TextInput style={InputStyles.basic} 
                     onChangeText={(email) => this.setState({email})}
                     placeholder='Email'
                     autoCapitalize='none'
                 />
-                <TextInput style={styles.input} 
+                <TextInput style={InputStyles.basic} 
                     onChangeText={(password) => this.setState({password})}
                     placeholder='Password'
                     autoCapitalize='none'
@@ -59,17 +63,3 @@ export default class Login extends Component {
     }
 }
 
-const styles = {
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF'
-    },
-    input: {
-        fontSize: 30,
-        borderBottomColor: 'grey',
-        borderBottomWidth: 1,
-        padding: 10
-    }
-}
