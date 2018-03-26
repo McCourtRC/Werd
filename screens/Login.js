@@ -8,14 +8,35 @@ import firebase from 'react-native-firebase'
 export default class Login extends Component {
     constructor(props) {
         super(props)
+        this.usersRef = firebase.firestore().collection('users')
+
         this.state = {
             email: null,
             password: null
         }
     }
+     
+    
 
-    onPressLogin = () => {
-        firebase.auth().signInAndRetrieveDataWithEmailAndPassword(this.state.email, this.state.password)
+    isEmail = (email) => {
+        re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+
+    loginWithUsername = (username, password) => {
+        // get email from username
+        this.usersRef.doc(username).get()
+            .then((snapshot) => {
+                email = snapshot.data().email
+                this.authenticate(email, password)
+            })
+            .catch((error) => {
+                Alert("Error", error.message)
+            })
+    }
+
+    authenticate = (email, password) => {
+        firebase.auth().signInAndRetrieveDataWithEmailAndPassword(email, password)
             .then((user)=> {
                 Alert.alert('Welcome!', 'successfully signed in')
             })
@@ -23,18 +44,23 @@ export default class Login extends Component {
                 Alert.alert('Error', error.message)
             })
     }
+
+    onPressLogin = () => {
+        email = this.state.email
+        password = this.state.password
+
+        if(this.isEmail(email)) {
+            this.authenticate(email, password)
+        }
+        else {
+            // Email is Username
+            this.loginWithUsername(email, password)
+        }
+        
+    }
     
     onPressSignUp = () => {
-        // firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(this.state.email, this.state.password)
-        //     .then((user)=> {
-        //         Alert.alert('Success', 'you have been signed up')
-        //     })
-        //     .catch((error)=> {
-        //         Alert.alert('Error', error.message)
-        //     })
-
         this.props.navigation.navigate("SignUp")
-
     }
 
     render() {
@@ -42,7 +68,7 @@ export default class Login extends Component {
             <View style={ViewStyles.centered}>
                 <TextInput style={InputStyles.basic} 
                     onChangeText={(email) => this.setState({email})}
-                    placeholder='Email'
+                    placeholder='Username'
                     autoCapitalize='none'
                 />
                 <TextInput style={InputStyles.basic} 

@@ -37,14 +37,14 @@ export default class SignUp extends Component {
     authenticate = (username, email, password) => {
         firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(email, password)
             .then(()=> {
-                this.signUp(username, email)
+                this.createUsername(username, email)
             })
             .catch((error)=> {
                 Alert.alert('Error', error.message)
             })
     }
 
-    signUp = (username, email) => {
+    createUsername = (username, email) => {
         this.usersRef.doc(username).set({
             email: email,
             wpm: 0
