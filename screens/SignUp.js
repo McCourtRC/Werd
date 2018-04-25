@@ -29,7 +29,6 @@ export default class SignUp extends Component {
                 }
             })
             .catch((error) => {
-                // user doesnt exist. Sign up new user
                 Alert.alert("Error", error.message)
             })
     }

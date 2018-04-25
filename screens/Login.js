@@ -5,7 +5,11 @@ import { InputStyles, ViewStyles } from '../styles/Styles'
 
 import firebase from 'react-native-firebase'
 
-export default class Login extends Component {
+import { connect } from 'react-redux'
+
+import { loginWithEmailAndPassword } from '../actions/authActions';
+
+class Login extends Component {
     constructor(props) {
         super(props)
         this.usersRef = firebase.firestore().collection('users')
@@ -36,13 +40,7 @@ export default class Login extends Component {
     }
 
     authenticate = (email, password) => {
-        firebase.auth().signInAndRetrieveDataWithEmailAndPassword(email, password)
-            .then((user)=> {
-                Alert.alert('Welcome!', 'successfully signed in')
-            })
-            .catch((error)=> {
-                Alert.alert('Error', error.message)
-            })
+        this.props.dispatch(loginWithEmailAndPassword(email,password))
     }
 
     onPressLogin = () => {
@@ -88,4 +86,11 @@ export default class Login extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return { 
+        user: state.authReducer.user,
+    }
+}
+export default connect(mapStateToProps)(Login)
 

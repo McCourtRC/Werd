@@ -41,7 +41,6 @@ export default class GameController extends Component {
     }
 
     quit = () => {
-        console.log("quitting")
         this.stopTimer()
 
         // mark unfinished game
